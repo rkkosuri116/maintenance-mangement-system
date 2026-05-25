@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Machine Management System</title>
+
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <a href="/">Machines</a>
+
+        <a href="/maintenance">Maintenance</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+    </div>
+
+    <div class="container">
+
+        <h1>Machine Management Dashboard</h1>
+
+        <h2>Add New Machine</h2>
+
+        <form method="POST">
+
+            <input
+                type="text"
+                name="machine_name"
+                placeholder="Machine Name"
+                required
+            >
+
+            <br><br>
+
+            <input
+                type="text"
+                name="location"
+                placeholder="Location"
+                required
+            >
+
+            <br><br>
+
+            <input
+                type="text"
+                name="status"
+                placeholder="Status"
+                required
+            >
+
+            <br><br>
+
+            <input
+                type="date"
+                name="install_date"
+                required
+            >
+
+            <br><br>
+
+            <button type="submit">
+
+                Add Machine
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="container">
+
+        <h2>Machine List</h2>
+
+        {% for machine in machines %}
+
+            <div class="card">
+
+                <h3>{{ machine[1] }}</h3>
+
+                <p>
+                    <strong>Location:</strong>
+                    {{ machine[2] }}
+                </p>
+
+                <p>
+                    <strong>Status:</strong>
+                    {{ machine[3] }}
+                </p>
+
+                <p>
+                    <strong>Install Date:</strong>
+                    {{ machine[4] }}
+                </p>
+                <a href="/delete_machine/{{ machine[0] }}">
+
+                    <button>
+                        Delete Machine
+                    </button>
+
+                </a>                
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Maintenance Logs</title>
+
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <a href="/">Machines</a>
+
+        <a href="/maintenance">Maintenance</a>
+
+        <a href="/dashboard">Dashboard</a>
+
+    </div>
+
+    <div class="container">
+
+        <h1>Maintenance Log System</h1>
+
+        <h2>Add Maintenance Record</h2>
+
+        <form method="POST">
+
+            <label>Machine:</label>
+
+            <br>
+
+            <select name="machine_id">
+
+                {% for machine in machines %}
+
+                    <option value="{{ machine[0] }}">
+                        {{ machine[1] }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+            <br><br>
+
+            <input
+                type="date"
+                name="maintenance_date"
+                required
+            >
+
+            <br><br>
+
+            <input
+                type="text"
+                name="issue_description"
+                placeholder="Issue Description"
+                required
+            >
+
+            <br><br>
+
+            <input
+                type="text"
+                name="technician_name"
+                placeholder="Technician Name"
+                required
+            >
+
+            <br><br>
+
+            <input
+                type="number"
+                name="downtime_minutes"
+                placeholder="Downtime Minutes"
+                required
+            >
+
+            <br><br>
+
+            <button type="submit">
+
+                Add Maintenance Record
+
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="container">
+
+        <h2>Maintenance History</h2>
+
+        {% for log in logs %}
+
+            <div class="card">
+
+                <h3>{{ log[1] }}</h3>
+
+                <p>
+                    <strong>Date:</strong>
+                    {{ log[2] }}
+                </p>
+
+                <p>
+                    <strong>Issue:</strong>
+                    {{ log[3] }}
+                </p>
+
+                <p>
+                    <strong>Technician:</strong>
+                    {{ log[4] }}
+                </p>
+                <a href="/delete_log/{{ log[0] }}">
+
+                    <button>
+                        Delete Log
+                    </button>
+
+                </a>
+                <p>
+                    <strong>Downtime:</strong>
+                    {{ log[5] }} minutes
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
